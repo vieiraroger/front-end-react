@@ -1,7 +1,9 @@
 # URLS
 
 http://localhost:3000/serie
+
 http://localhost:3000/pessoa
+
 http://localhost:3000/livro
 
 

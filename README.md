@@ -1,3 +1,10 @@
+# URLS
+
+http://localhost:3000/serie
+http://localhost:3000/pessoa
+http://localhost:3000/livro
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

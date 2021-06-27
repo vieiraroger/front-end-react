@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Livros from './components/Livros'
 import Pessoas from './components/Pessoas'
+import Series from './components/Series'
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         </Route>
         <Route path="/pessoa">
             <Pessoas />
+        </Route>
+        <Route path="/Serie">
+            <Series />
         </Route>
       </Switch>
     </Router>

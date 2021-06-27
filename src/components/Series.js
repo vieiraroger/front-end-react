@@ -16,7 +16,8 @@ export default class Series extends React.Component{
             "series": [],
             "serie": {"titulo": "", "streamming": ""},
             "selecionado": null,
-            "search": ""
+            "search": "",
+            "message": ""
         }
     }
 
@@ -42,6 +43,12 @@ export default class Series extends React.Component{
                 this.getAllSeries()
             }
         })
+        requisicao.catch((error) => {
+            this.setState({
+                "message": "(400) Requet incorreto"
+            })
+        })
+        
     }
 
     componentDidMount = () => {
@@ -117,6 +124,12 @@ export default class Series extends React.Component{
         return <div className="container">
             <div className="row">
                 <h2>Formulario</h2>
+                {this.state.message !== ""? 
+                <div class="alert alert-danger" role="alert">
+                    {this.state.message}
+                </div>
+                : null }
+                
                 <div className="col-md-12">
                     <section>
                         <FormularioSerie

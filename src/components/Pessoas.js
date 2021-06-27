@@ -1,85 +1,85 @@
 import React from 'react'
 import Axios from 'axios'
-import ListaLivro from './ListaLivro'
-import FormularioLivro from './FormularioLivro'
+import ListaPessoa from './ListaPessoa'
+import FormularioPessoa from './FormularioPessoa'
 
-export default class Livros extends React.Component{
+export default class Pessoas extends React.Component{
 
 
     
     constructor(props){
         super(props)
 
-        this.API_URL = "http://localhost:8080/livro"
+        this.API_URL = "http://localhost:8080/pessoa"
 
         this.state = {
-            "livros": [],
-            "livro": {"titulo": "", "autor": "", "valor": 0},
+            "pessoas": [],
+            "pessoa": {"nome": "", "idade": 0},
             "selecionado": null,
             "search": ""
         }
     }
 
-    selectLivro = (livro) => {
-        console.log(livro)
-        if(this.state.selecionado === livro){
+    selectPessoa = (pessoa) => {
+        console.log(pessoa)
+        if(this.state.selecionado === pessoa){
             this.setState({
                 'selecionado': null
             })
         } else {
             console.log("selecionado")
             this.setState({
-                'selecionado': livro
+                'selecionado': pessoa
             })
             this.render()
         }
     }
 
-    addLivro = (livro) => {
-        var requisicao = Axios.post(this.API_URL, livro)
+    addPessoa = (pessoa) => {
+        var requisicao = Axios.post(this.API_URL, pessoa)
         requisicao.then((resposta) => {
             if(resposta.status === 200){
-                this.getAllLivros()
+                this.getAllPessoas()
             }
         })
     }
 
     componentDidMount = () => {
-        this.getAllLivros()
+        this.getAllPessoas()
     }
 
-    getAllLivros = () => {
+    getAllPessoas = () => {
         console.log("dale")
 
         var url = this.API_URL
         if(url !== "") {
-            url = url + "?autor=" + this.state.search
+            url = url + "?nome=" + this.state.search
         }
         console.log(url)
         var requisicao = Axios.get(url)
         requisicao.then((resposta) => {
             this.setState({
-                "livros": resposta.data
+                "pessoas": resposta.data
             })
         })
     }
 
-    getALivro = (livroId) => {
+    getAPessoa = (pessoaId) => {
         console.log("dale 123")
-        var requisicao = Axios.get(this.API_URL + '/' + livroId)
+        var requisicao = Axios.get(this.API_URL + '/' + pessoaId)
         
         requisicao.then((resposta) => {
             console.log(resposta)
             this.setState({
-                "livro": resposta.data
+                "pessoa": resposta.data
             })
         })
     }
 
-    deleteLivro = (livroId) => {
-        var requisicao = Axios.delete(this.API_URL + '/' + livroId)
+    deletePessoa = (pessoaId) => {
+        var requisicao = Axios.delete(this.API_URL + '/' + pessoaId)
 
-        if(this.state.selecionado !== null && this.state.selecionado._id === livroId) {
+        if(this.state.selecionado !== null && this.state.selecionado._id === pessoaId) {
             this.setState({
                 "selecionado": null
             })
@@ -87,21 +87,21 @@ export default class Livros extends React.Component{
 
         requisicao.then((resposta) => {
             if(resposta.status === 200){
-                this.getAllLivros()
+                this.getAllPessoas()
             }
         })
 
         
     }
 
-    putLivro = (livro) => {
+    putPessoa = (pessoa) => {
         if(this.state.selecionado){
-            var requisicao = Axios.put(this.API_URL + '/' + this.state.selecionado._id, livro)
+            var requisicao = Axios.put(this.API_URL + '/' + this.state.selecionado._id, pessoa)
             requisicao.then((resposta) => {
                 console.log(resposta)
                 if(resposta.status === 200){
                     this.setState({"selecionado": null})
-                    this.getAllLivros()
+                    this.getAllPessoas()
                 }
             })
         }
@@ -119,30 +119,30 @@ export default class Livros extends React.Component{
                 <h2>Formulario</h2>
                 <div className="col-md-12">
                     <section>
-                        <FormularioLivro
-                            livros={this.state.livros}
+                        <FormularioPessoa
+                            pessoas={this.state.pessoas}
                             selecionado={this.state.selecionado}
-                            add={this.addLivro}
-                            put={this.putLivro}>
-                        </FormularioLivro>
+                            add={this.addPessoa}
+                            put={this.putPessoa}>
+                        </FormularioPessoa>
                     </section>
                 </div>
             </div>
             <div className="row">
-                <h2>Livros:</h2>
+                <h2>Pessoas:</h2>
                 
                 <div className="col-md-12">
-                    <label for="search">Filtro Autor:</label>
+                    <label for="search">Filtro Nome:</label>
                     <input className="form-control" type="text" name="search" id="search" onChange={this.handleSearch} value={this.state.search}></input>
-                    <button type="button" className="btn btn-primary" onClick={this.getAllLivros}>Refresh</button>
+                    <button type="button" className="btn btn-primary" onClick={this.getAllPessoas}>Refresh</button>
                     <section>
-                        <ListaLivro
-                            livro={this.state.livro}
-                            getALivro={this.getALivro}
-                            livros={this.state.livros}
-                            select={this.selectLivro}
-                            delete={this.deleteLivro}>
-                        </ListaLivro>
+                        <ListaPessoa
+                            pessoa={this.state.pessoa}
+                            getAPessoa={this.getAPessoa}
+                            pessoas={this.state.pessoas}
+                            select={this.selectPessoa}
+                            delete={this.deletePessoa}>
+                        </ListaPessoa>
                     </section>
                 </div>
             </div>

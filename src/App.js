@@ -6,6 +6,7 @@ import {
   Route
 } from "react-router-dom";
 import Livros from './components/Livros'
+import Pessoas from './components/Pessoas'
 
 function App() {
   return (
@@ -14,8 +15,11 @@ function App() {
         <Route path="/about">
             {"Página não existe"}
         </Route>
-        <Route path="/">
+        <Route path="/livro">
             <Livros />
+        </Route>
+        <Route path="/pessoa">
+            <Pessoas />
         </Route>
       </Switch>
     </Router>

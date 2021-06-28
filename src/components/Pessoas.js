@@ -2,6 +2,7 @@ import React from 'react'
 import Axios from 'axios'
 import ListaPessoa from './ListaPessoa'
 import FormularioPessoa from './FormularioPessoa'
+import NavBar from './NavBar'
 
 export default class Pessoas extends React.Component{
 
@@ -120,7 +121,8 @@ export default class Pessoas extends React.Component{
     }
 
     render(){
-        return <div className="container">
+        return  <div>
+        <NavBar></NavBar><div className="container">
             <div className="row">
                 <h2>Formulario</h2>
                 {this.state.message !== ""? 
@@ -158,7 +160,7 @@ export default class Pessoas extends React.Component{
                 </div>
             </div>
         </div>
-            
+    </div>
         
     }
 

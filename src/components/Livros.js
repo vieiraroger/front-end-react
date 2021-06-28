@@ -2,7 +2,7 @@ import React from 'react'
 import Axios from 'axios'
 import ListaLivro from './ListaLivro'
 import FormularioLivro from './FormularioLivro'
-
+import NavBar from './NavBar'
 export default class Livros extends React.Component{
 
 
@@ -120,7 +120,8 @@ export default class Livros extends React.Component{
     }
 
     render(){
-        return <div className="container">
+        return <div>
+        <NavBar></NavBar><div className="container">
             <div className="row">
                 <h2>Formulario</h2>
                 {this.state.message !== ""? 
@@ -159,7 +160,7 @@ export default class Livros extends React.Component{
             </div>
         </div>
             
-        
+        </div>
     }
 
 }
